@@ -22,4 +22,5 @@ namespace ContosoRecipes
             {
               webBuilder.UseStartup<Startup>();
             });
+  }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ContosoRecipes.Models;
 
 namespace ContosoRecipes.Controllers
 {
@@ -12,16 +13,32 @@ namespace ContosoRecipes.Controllers
   public class RecipesController : ControllerBase
   {
     [HttpGet]
-    public ActionResult GetRecipes()
+    public ActionResult GetRecipes([FromQuery] int limit)
     {
-      string[] recipes = { "Oxtail", "Curry Chicken", "Dumplings" };
+      Recipe[] recipes =
+      {
+        new() {Title = "Oxtail"},
+        new() {Title = "Curry Chiken"},
+        new() { Title = "Dumplings"}
+      };
 
-      if (recipes.Any()) return NotFound();
+      if (!recipes.Any()) return NotFound();
 
-      return Ok(recipes);
+      return Ok(recipes.Take(limit));
     }
 
-    [HttpDelete]
+    [HttpPost]
+    public ActionResult CreateNewRecipe([FromBody] Recipe newRecipe)
+    {
+      // validate and save to database
+      bool badThingsHappened = false;
+
+      if (badThingsHappened) return BadRequest();
+
+      return Created("", newRecipe);
+    }
+
+    [HttpDelete("all")]
     public ActionResult DeleteRecipe()
     {
       bool badThingsHappened = false;
