@@ -17,9 +17,9 @@ namespace ContosoRecipes.Controllers
     {
       Recipe[] recipes =
       {
-        new() {Title = "Oxtail"},
-        new() {Title = "Curry Chiken"},
-        new() { Title = "Dumplings"}
+        new() { Title = "Oxtail" },
+        new() { Title = "Curry Chiken" },
+        new() { Title = "Dumplings" }
       };
 
       if (!recipes.Any()) return NotFound();
